@@ -12,7 +12,7 @@ export const ListaTarefasContainer = styled.div`
   border-bottom-left-radius: 15px;
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   padding: 2rem;
   width: 100%;
   background-color: #4e5abc;
@@ -44,15 +44,6 @@ export const ListaContainer = styled.div`
   overflow: auto;
 `;
 
-export const RemoveButton = styled.button`
-  padding: 8px;
-  background-color: #de2f45;
-  border: none;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const Tarefa = styled.li`
   display: flex;
@@ -71,4 +62,12 @@ export const Tarefa = styled.li`
 export const LinhaHorizontal = styled.hr`
   width: 100%;
   margin: 16px;
+`
+export const Remove=styled.div`
+text-decoration: line-through;
+ margin-top: 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px 100px;
+  opacity: 50%;
 `

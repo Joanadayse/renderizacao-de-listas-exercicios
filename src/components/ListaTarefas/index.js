@@ -7,38 +7,49 @@ import {
   TaskInput,
   AddTaskButton,
   RemoveButton,
-  LinhaHorizontal
+  LinhaHorizontal,
+  Remove
 } from "./styled";
-import bin from "../../assets/bin.png";
+
+import SegundoComponente from "../SegundoComponente";
 
 export function ListaTarefas() {
   const [lista, setLista] = useState(["Fazer exercícios", "Estudar React"]);
   const [novaTarefa, setNovaTarefa] = useState("");
+  const [tarefasExcluidas, setTarefasExcluidas]= useState([])
 
   const onChangeTarefa = (event) => {
     setNovaTarefa(event.target.value);
   };
 
-  const adicionaTarefa = () => {
+  const adicionaTarefa = (event) => {
+    event.preventDefault()
     const novaLista = [...lista, novaTarefa];
     setLista(novaLista);
     setNovaTarefa("");
+    
   };
 
-  const removeTarefa = (tarefa) => {
-    const listaFiltrada = lista.filter((item) => item !== tarefa);
-    setLista(listaFiltrada);
-  };
+  // const precionaEnter =(event)=>{
+  //   if(event.key==="Enter"){
+  //     event.preventDefault()
+
+  //   }
+  // }
+
+
 
   return (
     <ListaTarefasContainer>
-      <InputContainer>
+      {/* <InputContainer onSubmit={(event)=>adicionaTarefa(event)}> */}
+      <InputContainer onSubmit={(event)=>adicionaTarefa(event)}>
         <TaskInput
           placeholder="Digite aqui uma tarefa"
           value={novaTarefa}
           onChange={onChangeTarefa}
         />
-        <AddTaskButton onClick={adicionaTarefa}>Adicionar</AddTaskButton>
+        {/* <AddTaskButton onClick={(event)=>precionaEnter(event)}>Adicionar</AddTaskButton> */}
+        <AddTaskButton type="submit">Adicionar</AddTaskButton>
       </InputContainer>
       <ListaContainer>
         <ul>
@@ -46,15 +57,23 @@ export function ListaTarefas() {
             return (
               <Tarefa key={index}>
                 <p>{tarefa}</p>
-                <RemoveButton onClick={() => removeTarefa(tarefa)}>
-                  <img src={bin} alt="" width="16px" />
-                </RemoveButton>
+               <SegundoComponente lista={lista} setLista={setLista} tarefa={tarefa} tarefasExcluidas={tarefasExcluidas} setTarefasExcluidas={setTarefasExcluidas}/>
               </Tarefa>
             );
           })}
         </ul>
       </ListaContainer>
       <LinhaHorizontal/>
+      {tarefasExcluidas.map((item , index)=>{
+        return(
+          // <div key={index} >
+          // <p color="red">{item }</p>
+          // </div>
+          <Remove>
+            <p>{item}</p>
+          </Remove>
+        )
+      })}
     </ListaTarefasContainer>
   );
 }
